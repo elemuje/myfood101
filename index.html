@@ -130,6 +130,7 @@
     <!-- animated ambient glow -->
     <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
     <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+    <div class="hero-rays" aria-hidden="true"></div>
     <div class="hero-spotlight" aria-hidden="true"></div>
 
     <div class="relative z-10 w-full max-w-3xl mx-auto px-4 flex flex-col items-center">
@@ -522,8 +523,10 @@
     /* ambient depth: warm stage spotlight, faint texture, edge vignette */
     .hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background-image:radial-gradient(rgba(255,215,0,.06) 1px, transparent 1.4px); background-size:22px 22px; opacity:.55; }
     .hero::after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(120% 85% at 50% 42%, transparent 52%, rgba(0,0,0,.6) 100%); }
-    .hero-spotlight { position:absolute; z-index:0; left:50%; top:46%; width:80vw; height:80vw; max-width:680px; max-height:680px; transform:translate(-50%,-50%); pointer-events:none; background:radial-gradient(circle, rgba(255,170,40,.28), rgba(255,120,20,.10) 45%, transparent 70%); filter:blur(30px); animation:spotPulse 8s ease-in-out infinite; }
-    @keyframes spotPulse { 0%,100% { opacity:.75; transform:translate(-50%,-50%) scale(1); } 50% { opacity:1; transform:translate(-50%,-50%) scale(1.06); } }
+    .hero-spotlight { position:absolute; z-index:0; left:50%; top:46%; width:88vw; height:88vw; max-width:720px; max-height:720px; transform:translate(-50%,-50%); pointer-events:none; background:radial-gradient(circle, rgba(255,175,45,.36), rgba(255,120,20,.14) 45%, transparent 70%); filter:blur(30px); animation:spotPulse 8s ease-in-out infinite; }
+    @keyframes spotPulse { 0%,100% { opacity:.8; transform:translate(-50%,-50%) scale(1); } 50% { opacity:1; transform:translate(-50%,-50%) scale(1.06); } }
+    .hero-rays { position:absolute; z-index:0; left:50%; top:46%; width:120vw; height:120vw; max-width:900px; max-height:900px; transform:translate(-50%,-50%); pointer-events:none; background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,215,0,.11) 0deg 6deg, transparent 6deg 18deg); -webkit-mask-image:radial-gradient(circle, #000 8%, rgba(0,0,0,.6) 34%, transparent 66%); mask-image:radial-gradient(circle, #000 8%, rgba(0,0,0,.6) 34%, transparent 66%); filter:blur(1px); animation:raySpin 44s linear infinite; }
+    @keyframes raySpin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
 
     .hero-shine { position:absolute; top:-40%; left:-60%; width:38%; height:180%; z-index:1; background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); pointer-events:none; animation: heroShine 6s ease-in-out 1.8s infinite; }
     @keyframes heroShine { 0% { left:-60%; } 22% { left:135%; } 100% { left:135%; } }
@@ -540,7 +543,7 @@
     @keyframes scrollBounce { 0%,100% { transform:translate(-50%,0); } 50% { transform:translate(-50%,7px); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-stage, .hero-glow, .hero-spotlight, .hero-shine, .hero-slide, .hero-cta--wa::after, .hero-dot, .hero-scroll { animation:none !important; }
+      .hero-stage, .hero-glow, .hero-spotlight, .hero-rays, .hero-shine, .hero-slide, .hero-cta--wa::after, .hero-dot, .hero-scroll { animation:none !important; }
       .hero-stage { opacity:1; transform:none; }
       .hero-slide { transition:none; }
       .hero-glow { opacity:.5; transform:translateX(-50%); }
