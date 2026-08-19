@@ -60,7 +60,7 @@
     /* Scrollbar */
     ::-webkit-scrollbar { width: 10px; height: 10px; }
     ::-webkit-scrollbar-thumb { background: #E30613; border-radius: 8px; }
-    ::-webkit-scrollbar-track { background: #f4f4f4; }
+    ::-webkit-scrollbar-track { background: #17140f; }
 
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: none; }
@@ -74,25 +74,25 @@
     .menu-card:hover .card-img { transform: scale(1.08); }
 
     /* skeleton shimmer while a food photo loads */
-    .img-wrap { background: linear-gradient(100deg,#eee 30%,#f6f6f6 50%,#eee 70%); background-size: 200% 100%; animation: shimmer 1.3s linear infinite; }
+    .img-wrap { background: linear-gradient(100deg,#1c1813 30%,#2a241c 50%,#1c1813 70%); background-size: 200% 100%; animation: shimmer 1.3s linear infinite; }
     @keyframes shimmer { to { background-position: -200% 0; } }
-    .img-wrap.loaded { animation: none; background: #f1f1f1; }
+    .img-wrap.loaded { animation: none; background: #1c1813; }
   </style>
 </head>
-<body class="bg-[#faf7f2] text-brand-ink antialiased overflow-x-hidden">
+<body class="bg-[#0d0b0a] text-[#ece7de] antialiased overflow-x-hidden">
 
   <!-- ============ NAVBAR ============ -->
-  <header id="navbar" class="fixed top-0 inset-x-0 z-40 transition-all duration-300 bg-white/85 backdrop-blur-md shadow-sm">
+  <header id="navbar" class="fixed top-0 inset-x-0 z-40 transition-all duration-300 bg-[#0d0b0a]/90 backdrop-blur-md border-b border-brand-yellow/10">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-[4.5rem] flex items-center justify-between">
       <a href="#home" class="flex items-center gap-3 shrink-0">
         <img src="https://turquoise-jealous-unicorn-912.mypinata.cloud/ipfs/bafkreib6g4nuyk3z3l7didqbzoy5ype3p6cecmdptbbwljhnycrvnas6fe" alt="Food 101 logo" class="h-10 w-10 rounded-full object-cover ring-2 ring-brand-yellow" />
         <span class="leading-tight">
           <span class="block font-display text-lg sm:text-xl font-bold">Food <span class="text-brand-red">101</span></span>
-          <span class="hidden sm:block text-[9px] uppercase tracking-[0.25em] text-gray-500">The Perfect Blend of Taste</span>
+          <span class="hidden sm:block text-[9px] uppercase tracking-[0.25em] text-white/55">The Perfect Blend of Taste</span>
         </span>
       </a>
 
-      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-700">
+      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium text-white/75">
         <li><a href="#home" class="hover:text-brand-red transition-colors">Home</a></li>
         <li><a href="#menu" class="hover:text-brand-red transition-colors">Menu</a></li>
         <li><a href="#gallery" class="hover:text-brand-red transition-colors">Gallery</a></li>
@@ -103,18 +103,18 @@
 
       <div class="flex items-center gap-2 sm:gap-3">
         <a href="#menu" class="hidden md:inline-flex btn-primary text-sm !py-2 !px-5">Order Now</a>
-        <button id="cartBtn" aria-label="Open cart" class="relative grid place-items-center h-11 w-11 rounded-full bg-brand-ink text-white hover:bg-brand-red transition-colors">
+        <button id="cartBtn" aria-label="Open cart" class="relative grid place-items-center h-11 w-11 rounded-full bg-brand-red text-white hover:bg-brand-red-dark transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-.534 1.966-2.19 2.29-3.373l1.153-4.207a.75.75 0 00-.72-.955H5.106M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
           <span id="cartBadge" class="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 grid place-items-center rounded-full bg-brand-yellow text-brand-ink text-[11px] font-bold scale-0 transition-transform">0</span>
         </button>
-        <button id="menuBtn" aria-label="Toggle menu" class="lg:hidden grid place-items-center h-11 w-11 rounded-full hover:bg-gray-100 transition-colors">
+        <button id="menuBtn" aria-label="Toggle menu" class="lg:hidden grid place-items-center h-11 w-11 rounded-full hover:bg-white/10 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" /></svg>
         </button>
       </div>
     </nav>
 
-    <div id="mobileMenu" class="lg:hidden hidden border-t border-gray-100 bg-white">
-      <div class="px-4 py-4 flex flex-col gap-1 text-gray-700 font-medium">
+    <div id="mobileMenu" class="lg:hidden hidden border-t border-white/10 bg-[#0d0b0a]">
+      <div class="px-4 py-4 flex flex-col gap-1 text-white/75 font-medium">
         <a href="#home" class="mobile-link">Home</a>
         <a href="#menu" class="mobile-link">Menu</a>
         <a href="#gallery" class="mobile-link">Gallery</a>
@@ -148,7 +148,7 @@
   </section>
 
   <!-- ============ FEATURES STRIP ============ -->
-  <section class="bg-brand-ink text-white">
+  <section class="bg-[#121010] text-white border-y border-brand-yellow/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div><p class="text-2xl">🍚</p><p class="mt-1 text-sm font-semibold">Freshly Cooked</p><p class="text-xs text-white/60">Never pre-made</p></div>
       <div><p class="text-2xl">🛵</p><p class="mt-1 text-sm font-semibold">Quick Delivery</p><p class="text-xs text-white/60">Across Ilorin</p></div>
@@ -158,12 +158,12 @@
   </section>
 
   <!-- ============ MENU ============ -->
-  <section id="menu" class="py-20 lg:py-28">
+  <section id="menu" class="py-20 lg:py-28 bg-[#0d0b0a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <p class="section-eyebrow">Our Menu</p>
         <h2 class="section-title">Made Fresh, Served Hot</h2>
-        <p class="mt-4 text-gray-600">Browse our full menu, add your favourites to the cart, and check out on WhatsApp in seconds.</p>
+        <p class="mt-4 text-white/65">Browse our full menu, add your favourites to the cart, and check out on WhatsApp in seconds.</p>
       </div>
 
       <div id="filters" class="mt-10 flex gap-2 overflow-x-auto no-scrollbar pb-2 sm:justify-center sm:flex-wrap reveal"></div>
@@ -173,7 +173,7 @@
   </section>
 
   <!-- ============ GALLERY ============ -->
-  <section id="gallery" class="py-20 lg:py-24 bg-white">
+  <section id="gallery" class="py-20 lg:py-24 bg-[#121010]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <p class="section-eyebrow">Gallery</p>
@@ -184,7 +184,7 @@
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-  <section id="testimonials" class="py-20 lg:py-28">
+  <section id="testimonials" class="py-20 lg:py-28 bg-[#0d0b0a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <p class="section-eyebrow">Reviews</p>
@@ -193,34 +193,34 @@
       <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <figure class="testimonial reveal">
           <div class="text-brand-yellow text-lg">★★★★★</div>
-          <blockquote class="mt-3 text-gray-700">"The jollof rice is unmatched in Ilorin. Ordered on WhatsApp and it arrived hot and fast. My new favourite spot!"</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-red">A</span><span><span class="block font-semibold">Aisha O.</span><span class="text-sm text-gray-500">Kwara Poly</span></span></figcaption>
+          <blockquote class="mt-3 text-white/75">"The jollof rice is unmatched in Ilorin. Ordered on WhatsApp and it arrived hot and fast. My new favourite spot!"</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-red">A</span><span><span class="block font-semibold">Aisha O.</span><span class="text-sm text-white/55">Kwara Poly</span></span></figcaption>
         </figure>
         <figure class="testimonial reveal">
           <div class="text-brand-yellow text-lg">★★★★★</div>
-          <blockquote class="mt-3 text-gray-700">"Their loaded shawarma is huge and packed with flavour. Portions are generous and prices are honestly fair."</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-ink">T</span><span><span class="block font-semibold">Tunde A.</span><span class="text-sm text-gray-500">Unilorin</span></span></figcaption>
+          <blockquote class="mt-3 text-white/75">"Their loaded shawarma is huge and packed with flavour. Portions are generous and prices are honestly fair."</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-ink">T</span><span><span class="block font-semibold">Tunde A.</span><span class="text-sm text-white/55">Unilorin</span></span></figcaption>
         </figure>
         <figure class="testimonial reveal">
           <div class="text-brand-yellow text-lg">★★★★★</div>
-          <blockquote class="mt-3 text-gray-700">"Double stack burger + a milkshake = perfect combo. Food 101 never misses. Highly recommended to every student!"</blockquote>
-          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-red">B</span><span><span class="block font-semibold">Blessing E.</span><span class="text-sm text-gray-500">GRA, Ilorin</span></span></figcaption>
+          <blockquote class="mt-3 text-white/75">"Double stack burger + a milkshake = perfect combo. Food 101 never misses. Highly recommended to every student!"</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3"><span class="avatar bg-brand-red">B</span><span><span class="block font-semibold">Blessing E.</span><span class="text-sm text-white/55">GRA, Ilorin</span></span></figcaption>
         </figure>
       </div>
     </div>
   </section>
 
   <!-- ============ ORDER ============ -->
-  <section id="order" class="py-20 lg:py-28 bg-white">
+  <section id="order" class="py-20 lg:py-28 bg-[#121010]">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <p class="section-eyebrow">Checkout</p>
         <h2 class="section-title">Place Your Order</h2>
-        <p class="mt-4 text-gray-600">Add items to your cart, fill in your details, and we'll open WhatsApp with your full order ready to send.</p>
+        <p class="mt-4 text-white/65">Add items to your cart, fill in your details, and we'll open WhatsApp with your full order ready to send.</p>
       </div>
 
       <div class="mt-12 grid lg:grid-cols-5 gap-8 items-start">
-        <form id="orderForm" class="lg:col-span-3 bg-[#faf7f2] rounded-3xl p-6 sm:p-8 shadow-card reveal">
+        <form id="orderForm" class="lg:col-span-3 bg-[#1a1613] border border-brand-yellow/12 rounded-3xl p-6 sm:p-8 shadow-card reveal">
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label class="form-label" for="fName">Full name</label>
@@ -256,17 +256,17 @@
           </div>
 
           <div class="mt-4">
-            <label class="form-label" for="fNotes">Notes <span class="text-gray-400 font-normal">(optional)</span></label>
+            <label class="form-label" for="fNotes">Notes <span class="text-white/45 font-normal">(optional)</span></label>
             <textarea id="fNotes" name="notes" rows="2" placeholder="Extra pepper, no onions, call on arrival…" class="form-input resize-none"></textarea>
           </div>
 
-          <div class="mt-6 border-t border-gray-200 pt-5">
+          <div class="mt-6 border-t border-white/10 pt-5">
             <div class="flex items-center justify-between">
               <h3 class="font-display text-lg font-bold">Your Order</h3>
               <button type="button" id="openCartFromForm" class="text-sm font-semibold text-brand-red hover:underline">Edit cart</button>
             </div>
             <div id="orderSummary" class="mt-3 space-y-2 text-sm"></div>
-            <div class="mt-4 flex items-center justify-between border-t border-dashed border-gray-300 pt-3">
+            <div class="mt-4 flex items-center justify-between border-t border-dashed border-white/15 pt-3">
               <span class="font-semibold">Total</span>
               <span id="orderTotal" class="font-display text-xl font-bold text-brand-red">₦0</span>
             </div>
@@ -276,11 +276,11 @@
             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.148-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Send Order on WhatsApp
           </button>
-          <p class="mt-3 text-center text-xs text-gray-500">No payment online — you confirm price &amp; pay on delivery/pickup.</p>
+          <p class="mt-3 text-center text-xs text-white/55">No payment online — you confirm price &amp; pay on delivery/pickup.</p>
         </form>
 
         <aside class="lg:col-span-2 space-y-4 reveal">
-          <div class="rounded-3xl bg-brand-ink text-white p-6 sm:p-8">
+          <div class="rounded-3xl bg-[#17140f] border border-brand-yellow/15 text-white p-6 sm:p-8">
             <h3 class="font-display text-xl font-bold">How ordering works</h3>
             <ol class="mt-5 space-y-4 text-sm text-white/85">
               <li class="flex gap-3"><span class="step">1</span> Add your favourite dishes to the cart.</li>
@@ -292,7 +292,7 @@
           <div class="rounded-3xl bg-brand-yellow/20 border border-brand-yellow/40 p-6">
             <p class="font-semibold">Prefer to talk to us?</p>
             <a href="tel:+2348145066282" class="mt-2 flex items-center gap-2 text-brand-red font-bold text-lg hover:underline">+234 814 506 6282</a>
-            <p class="mt-1 text-sm text-gray-600">Open daily · Call or WhatsApp anytime</p>
+            <p class="mt-1 text-sm text-white/65">Open daily · Call or WhatsApp anytime</p>
           </div>
         </aside>
       </div>
@@ -300,7 +300,7 @@
   </section>
 
   <!-- ============ CONTACT ============ -->
-  <section id="contact" class="py-20 lg:py-28">
+  <section id="contact" class="py-20 lg:py-28 bg-[#0d0b0a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-2xl mx-auto reveal">
         <p class="section-eyebrow">Get in Touch</p>
@@ -310,31 +310,31 @@
         <a href="https://wa.me/2348145066282" target="_blank" rel="noopener" class="contact-card group">
           <span class="contact-icon bg-[#25D366]/10 text-[#25D366]">💬</span>
           <h3 class="mt-4 font-semibold">WhatsApp</h3>
-          <p class="mt-1 text-sm text-gray-600">+234 814 506 6282</p>
+          <p class="mt-1 text-sm text-white/65">+234 814 506 6282</p>
           <span class="contact-link">Chat now →</span>
         </a>
         <a href="tel:+2348145066282" class="contact-card group">
           <span class="contact-icon bg-brand-red/10 text-brand-red">📞</span>
           <h3 class="mt-4 font-semibold">Call Us</h3>
-          <p class="mt-1 text-sm text-gray-600">+234 814 506 6282</p>
+          <p class="mt-1 text-sm text-white/65">+234 814 506 6282</p>
           <span class="contact-link">Tap to call →</span>
         </a>
         <a href="mailto:healthyfood101@gmail.com" class="contact-card group">
           <span class="contact-icon bg-brand-yellow/20 text-brand-ink">✉️</span>
           <h3 class="mt-4 font-semibold">Email</h3>
-          <p class="mt-1 text-sm text-gray-600 break-all">healthyfood101@gmail.com</p>
+          <p class="mt-1 text-sm text-white/65 break-all">healthyfood101@gmail.com</p>
           <span class="contact-link">Send a mail →</span>
         </a>
         <div class="contact-card">
-          <span class="contact-icon bg-brand-ink/10 text-brand-ink">📍</span>
+          <span class="contact-icon bg-brand-yellow/10 text-brand-yellow">📍</span>
           <h3 class="mt-4 font-semibold">Our Branches</h3>
-          <p class="mt-1 text-sm text-gray-600">Kwara Poly Branch</p>
-          <p class="text-sm text-gray-600">Unilorin Branch</p>
-          <p class="text-sm text-gray-500">Ilorin, Kwara State</p>
+          <p class="mt-1 text-sm text-white/65">Kwara Poly Branch</p>
+          <p class="text-sm text-white/65">Unilorin Branch</p>
+          <p class="text-sm text-white/55">Ilorin, Kwara State</p>
         </div>
       </div>
 
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-gray-600">
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-white/65">
         <span class="font-medium">Follow us:</span>
         <div class="flex items-center gap-3">
           <a href="https://instagram.com/food101ng" target="_blank" rel="noopener" class="social">Instagram</a>
@@ -388,15 +388,15 @@
 
   <!-- ============ CART DRAWER ============ -->
   <div id="cartOverlay" class="fixed inset-0 z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="cartDrawer" class="fixed top-0 right-0 z-[60] h-full w-full max-w-md bg-white shadow-premium translate-x-full transition-transform duration-300 flex flex-col">
-    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+  <aside id="cartDrawer" class="fixed top-0 right-0 z-[60] h-full w-full max-w-md bg-[#141110] shadow-premium translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
       <h3 class="font-display text-xl font-bold">Your Cart</h3>
-      <button id="closeCart" aria-label="Close cart" class="grid place-items-center h-10 w-10 rounded-full hover:bg-gray-100 transition-colors">
+      <button id="closeCart" aria-label="Close cart" class="grid place-items-center h-10 w-10 rounded-full hover:bg-white/10 transition-colors">
         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
     </div>
     <div id="cartItems" class="flex-1 overflow-y-auto px-5 py-4 space-y-4"></div>
-    <div id="cartFooter" class="border-t border-gray-100 px-5 py-4 space-y-4">
+    <div id="cartFooter" class="border-t border-white/10 px-5 py-4 space-y-4">
       <div class="flex items-center justify-between text-lg">
         <span class="font-semibold">Total</span>
         <span id="cartTotal" class="font-display font-bold text-brand-red">₦0</span>
@@ -414,42 +414,43 @@
 
   <!-- ============ COMPONENT STYLES ============ -->
   <style>
-    .btn-primary { display:inline-flex; align-items:center; gap:.5rem; background:#E30613; color:#fff; font-weight:600; padding:.85rem 1.75rem; border-radius:9999px; box-shadow:0 10px 25px rgba(227,6,19,.3); transition:transform .2s ease, background .2s ease, box-shadow .2s ease; }
-    .btn-primary:hover { background:#B00410; transform:translateY(-2px); box-shadow:0 14px 30px rgba(227,6,19,.4); }
+    .btn-primary { display:inline-flex; align-items:center; gap:.5rem; background:#E30613; color:#fff; font-weight:600; padding:.85rem 1.75rem; border-radius:9999px; box-shadow:0 10px 25px rgba(227,6,19,.35); transition:transform .2s ease, background .2s ease, box-shadow .2s ease; }
+    .btn-primary:hover { background:#ff1a2b; transform:translateY(-2px); box-shadow:0 14px 34px rgba(227,6,19,.5); }
     .btn-outline-light { display:inline-flex; align-items:center; gap:.5rem; background:rgba(255,255,255,.1); color:#fff; font-weight:600; padding:.85rem 1.75rem; border-radius:9999px; border:1px solid rgba(255,255,255,.4); backdrop-filter:blur(4px); transition:background .2s ease, transform .2s ease; }
     .btn-outline-light:hover { background:rgba(255,255,255,.2); transform:translateY(-2px); }
 
     .section-eyebrow { text-transform:uppercase; letter-spacing:.25em; font-size:.75rem; font-weight:700; color:#E30613; }
-    .section-title { font-size:2rem; line-height:1.15; font-weight:700; margin-top:.5rem; }
+    .section-title { font-size:2rem; line-height:1.15; font-weight:700; margin-top:.5rem; color:#FFD700; }
     @media (min-width:640px){ .section-title{ font-size:2.6rem; } }
 
-    .mobile-link { padding:.65rem .5rem; border-radius:.6rem; }
-    .mobile-link:hover { background:#faf7f2; color:#E30613; }
+    .mobile-link { padding:.65rem .5rem; border-radius:.6rem; color:#ece7de; }
+    .mobile-link:hover { background:rgba(255,215,0,.1); color:#FFD700; }
 
     /* Menu card */
-    .menu-card { background:#fff; border-radius:1.25rem; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,.06); display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease; }
-    .menu-card:hover { transform:translateY(-4px); box-shadow:0 20px 45px rgba(0,0,0,.12); }
-    .chip { white-space:nowrap; padding:.55rem 1.1rem; border-radius:9999px; font-size:.85rem; font-weight:600; background:#fff; color:#444; border:1px solid #e7e7e7; transition:all .2s ease; cursor:pointer; }
-    .chip:hover { border-color:#E30613; color:#E30613; }
-    .chip.active { background:#E30613; color:#fff; border-color:#E30613; box-shadow:0 8px 18px rgba(227,6,19,.28); }
+    .menu-card { background:#17140f; border:1px solid rgba(255,215,0,.14); border-radius:1.25rem; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,.5); display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .menu-card:hover { transform:translateY(-4px); border-color:rgba(255,215,0,.5); box-shadow:0 22px 50px rgba(0,0,0,.65); }
+    .chip { white-space:nowrap; padding:.55rem 1.1rem; border-radius:9999px; font-size:.85rem; font-weight:600; background:#17140f; color:#d8d0c4; border:1px solid rgba(255,215,0,.2); transition:all .2s ease; cursor:pointer; }
+    .chip:hover { border-color:#FFD700; color:#FFD700; }
+    .chip.active { background:#E30613; color:#fff; border-color:#E30613; box-shadow:0 8px 18px rgba(227,6,19,.4); }
 
-    .qty-btn { width:1.9rem; height:1.9rem; display:grid; place-items:center; border-radius:9999px; border:1px solid #e5e5e5; font-weight:700; line-height:1; transition:all .15s ease; }
+    .qty-btn { width:1.9rem; height:1.9rem; display:grid; place-items:center; border-radius:9999px; border:1px solid rgba(255,255,255,.2); color:#ece7de; font-weight:700; line-height:1; transition:all .15s ease; }
     .qty-btn:hover { background:#E30613; color:#fff; border-color:#E30613; }
 
-    .form-label { display:block; font-size:.8rem; font-weight:600; color:#555; margin-bottom:.35rem; }
-    .form-input { width:100%; border:1px solid #e2e2e2; border-radius:.85rem; padding:.7rem .9rem; font-size:.95rem; background:#fff; transition:border .15s ease, box-shadow .15s ease; }
-    .form-input:focus { outline:none; border-color:#E30613; box-shadow:0 0 0 3px rgba(227,6,19,.12); }
+    .form-label { display:block; font-size:.8rem; font-weight:600; color:#c9c1b5; margin-bottom:.35rem; }
+    .form-input { width:100%; border:1px solid rgba(255,255,255,.14); border-radius:.85rem; padding:.7rem .9rem; font-size:.95rem; background:#0f0d0b; color:#ece7de; transition:border .15s ease, box-shadow .15s ease; }
+    .form-input::placeholder { color:#6f685e; }
+    .form-input:focus { outline:none; border-color:#FFD700; box-shadow:0 0 0 3px rgba(255,215,0,.18); }
 
-    .testimonial { background:#fff; border-radius:1.25rem; padding:1.75rem; box-shadow:0 4px 24px rgba(0,0,0,.06); }
+    .testimonial { background:#17140f; border:1px solid rgba(255,215,0,.14); border-radius:1.25rem; padding:1.75rem; box-shadow:0 8px 30px rgba(0,0,0,.5); }
     .avatar { width:2.5rem; height:2.5rem; border-radius:9999px; display:grid; place-items:center; color:#fff; font-weight:700; }
     .step { flex:none; width:1.6rem; height:1.6rem; border-radius:9999px; background:#E30613; color:#fff; display:grid; place-items:center; font-size:.8rem; font-weight:700; }
 
-    .contact-card { background:#fff; border-radius:1.25rem; padding:1.75rem; box-shadow:0 4px 24px rgba(0,0,0,.06); transition:transform .25s ease, box-shadow .25s ease; display:block; }
-    .contact-card:hover { transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,.1); }
+    .contact-card { background:#17140f; border:1px solid rgba(255,215,0,.14); border-radius:1.25rem; padding:1.75rem; box-shadow:0 8px 30px rgba(0,0,0,.5); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; display:block; }
+    .contact-card:hover { transform:translateY(-4px); border-color:rgba(255,215,0,.45); box-shadow:0 18px 44px rgba(0,0,0,.6); }
     .contact-icon { width:3rem; height:3rem; border-radius:1rem; display:grid; place-items:center; font-size:1.4rem; }
-    .contact-link { display:inline-block; margin-top:.75rem; font-size:.85rem; font-weight:600; color:#E30613; }
-    .social { padding:.4rem .9rem; border-radius:9999px; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.06); font-size:.85rem; font-weight:600; transition:all .2s ease; }
-    .social:hover { background:#E30613; color:#fff; }
+    .contact-link { display:inline-block; margin-top:.75rem; font-size:.85rem; font-weight:600; color:#FFD700; }
+    .social { padding:.4rem .9rem; border-radius:9999px; background:#17140f; border:1px solid rgba(255,215,0,.2); color:#d8d0c4; font-size:.85rem; font-weight:600; transition:all .2s ease; }
+    .social:hover { background:#E30613; color:#fff; border-color:#E30613; }
   </style>
 
   <!-- ============ APP SCRIPT ============ -->
@@ -470,11 +471,11 @@
     ];
 
     const MENU = [
-      { id: 1,  name: 'Large Plate of Rice & Chicken', price: 3000, cat: 'rice',     img: 'images/large-rice-chicken.png', desc: 'Large plate of rice served with grilled chicken' },
-      { id: 2,  name: 'Large Plate of Rice & Fish',    price: 3000, cat: 'rice',     img: 'images/large-rice-fish.png', desc: 'Large plate of rice served with fried fish' },
+      { id: 1,  name: 'Large Plate of Rice & Chicken', price: 3000, cat: 'rice',     img: 'images/large-rice-chicken.jpg', desc: 'Large plate of rice served with grilled chicken' },
+      { id: 2,  name: 'Large Plate of Rice & Fish',    price: 3000, cat: 'rice',     img: 'images/large-rice-fish.jpg', desc: 'Large plate of rice served with fried fish' },
       { id: 3,  name: 'Large Plate of Rice & Beef',    price: 2200, cat: 'rice',     img: DRIVE('1FNXBMyq3OegPD02rVKBErJwt749al4F0'), desc: 'Large plate of rice served with tender beef' },
-      { id: 4,  name: 'Large Plate of Rice (Plain)',   price: 1900, cat: 'rice',     img: 'images/large-rice-plain.png', desc: 'Large plate of rice, plain' },
-      { id: 5,  name: 'Small Plate of Rice & Chicken', price: 2600, cat: 'rice',     img: 'images/small-rice-chicken.png', desc: 'Small plate of rice served with grilled chicken' },
+      { id: 4,  name: 'Large Plate of Rice (Plain)',   price: 1900, cat: 'rice',     img: 'images/large-rice-plain.jpg', desc: 'Large plate of rice, plain' },
+      { id: 5,  name: 'Small Plate of Rice & Chicken', price: 2600, cat: 'rice',     img: 'images/small-rice-chicken.jpg', desc: 'Small plate of rice served with grilled chicken' },
       { id: 6,  name: 'Small Plate of Rice & Fish',    price: 2600, cat: 'rice',     img: DRIVE('1it_PfmMq-Bqj1rb-1k3U-z97vbRguBkZ'), desc: 'Small plate of rice served with fried fish' },
       { id: 7,  name: 'Small Plate of Rice & Beef',    price: 1800, cat: 'rice',     img: DRIVE('12eItHFxpOL_hPn7OQKWgUxPEhEjEYb4F'), desc: 'Small plate of rice served with tender beef' },
       { id: 8,  name: 'Small Plate of Rice (Plain)',   price: 1500, cat: 'rice',     img: DRIVE('186Jx1DQjwJ1y1NEknZbY_u9GcQeViQru'), desc: 'Small plate of rice, plain' },
@@ -495,7 +496,7 @@
       { id: 23, name: 'Chicken Pie',           price: 600,  cat: 'snacks',   img: DRIVE('1cW26r-w8nvUsfDjkE4DTPASPjpL9XzHt'), desc: 'Flaky pastry filled with chicken' },
       { id: 24, name: 'Meat Pie',              price: 600,  cat: 'snacks',   img: DRIVE('1GrP0yhnIxMOZllVbwkVPXyB2C9Fp_qrv'), desc: 'Classic Nigerian meat pie' },
       { id: 25, name: 'Egg Roll',              price: 500,  cat: 'snacks',   img: DRIVE('1duw3pXHCAmV_4_FiMwB99hEjba0skjwx'), desc: 'Boiled egg wrapped in dough' },
-      { id: 26, name: 'Doughnut',              price: 400,  cat: 'snacks',   img: 'images/doughnut.png', desc: 'Soft sugared doughnut' },
+      { id: 26, name: 'Doughnut',              price: 400,  cat: 'snacks',   img: 'images/doughnut.jpg', desc: 'Soft sugared doughnut' },
       { id: 27, name: 'Cone Ice Cream',        price: 500,  cat: 'drinks',   img: DRIVE('1qYqrEHHJ8I6Ev8S9R3rXceMOtZX9xRJl'), desc: 'Creamy ice cream in a crispy cone' },
       { id: 28, name: 'Ice Cream Cup (130 ml)',price: 1000, cat: 'drinks',   img: DRIVE('1FzII7D31-fTZ7YMNaDuPXhWW7wrWXHVQ'), desc: 'Ice cream cup — 130 ml' },
       { id: 29, name: 'Ice Cream Cup (250 ml)',price: 1500, cat: 'drinks',   img: DRIVE('1G1LYLQBtF2mQ6GlOor6rKq4vO3HVZbe3'), desc: 'Ice cream cup — 250 ml' },
@@ -512,6 +513,7 @@
     const filters = document.getElementById('filters');
 
     function cardHTML(item) {
+      const catLabel = (CATEGORIES.find(c => c.id === item.cat) || {}).label || '';
       return `
         <article class="menu-card" data-cat="${item.cat}">
           <div class="img-wrap relative aspect-[4/3] overflow-hidden">
@@ -519,11 +521,12 @@
                  class="card-img h-full w-full object-cover"
                  onload="this.parentElement.classList.add('loaded')"
                  onerror="this.parentElement.classList.add('loaded');this.style.display='none';this.parentElement.classList.add('img-fallback');this.parentElement.dataset.label='${item.name.replace(/'/g,'')}'" />
-            <span class="absolute top-2 left-2 bg-white/90 text-brand-ink text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm">${naira(item.price)}</span>
+            <span class="absolute top-2 left-2 bg-black/55 backdrop-blur-sm text-brand-yellow border border-brand-yellow/40 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">${catLabel}</span>
+            <span class="absolute top-2 right-2 bg-brand-yellow text-brand-ink text-[12px] font-bold px-2.5 py-1 rounded-full shadow">${naira(item.price)}</span>
           </div>
           <div class="p-4 flex flex-col flex-1">
-            <h3 class="font-semibold text-[15px] leading-snug">${item.name}</h3>
-            <p class="mt-1 text-sm text-gray-500 line-clamp-2 flex-1">${item.desc}</p>
+            <h3 class="font-semibold text-[15px] leading-snug text-white">${item.name}</h3>
+            <p class="mt-1 text-sm text-white/50 line-clamp-2 flex-1">${item.desc}</p>
             <button data-add="${item.id}" class="mt-4 btn-primary w-full justify-center !py-2.5 text-sm">
               Add to Cart
             </button>
@@ -601,7 +604,7 @@
 
       // drawer
       if (!count) {
-        cartItemsEl.innerHTML = `<div class="h-full min-h-[40vh] flex flex-col items-center justify-center text-center text-gray-400">
+        cartItemsEl.innerHTML = `<div class="h-full min-h-[40vh] flex flex-col items-center justify-center text-center text-white/45">
           <span class="text-5xl">🛒</span>
           <p class="mt-4 font-medium">Your cart is empty</p>
           <p class="text-sm">Add some delicious meals to get started.</p>
@@ -620,7 +623,7 @@
                 <button class="qty-btn" data-dec="${id}">−</button>
                 <span class="w-6 text-center text-sm font-semibold">${q}</span>
                 <button class="qty-btn" data-inc="${id}">+</button>
-                <button class="ml-auto text-xs text-gray-400 hover:text-brand-red" data-rem="${id}">Remove</button>
+                <button class="ml-auto text-xs text-white/45 hover:text-brand-red" data-rem="${id}">Remove</button>
               </div>
             </div>
           </div>`;
@@ -630,11 +633,11 @@
 
       // order summary (checkout form)
       if (!count) {
-        orderSummary.innerHTML = `<p class="text-gray-400">No items yet — add meals from the menu above.</p>`;
+        orderSummary.innerHTML = `<p class="text-white/45">No items yet — add meals from the menu above.</p>`;
       } else {
         orderSummary.innerHTML = Object.entries(cart).map(([id, q]) => {
           const m = MENU.find(x => x.id === +id);
-          return `<div class="flex justify-between gap-2"><span class="text-gray-600">${m.name} × ${q}</span><span class="font-medium">${naira(m.price * q)}</span></div>`;
+          return `<div class="flex justify-between gap-2"><span class="text-white/65">${m.name} × ${q}</span><span class="font-medium">${naira(m.price * q)}</span></div>`;
         }).join('');
       }
       orderTotalEl.textContent = naira(cartTotal());
@@ -727,8 +730,8 @@
 
   <!-- fallback label for broken images -->
   <style>
-    .img-fallback { display:grid; place-items:center; background:#fbeaea; }
-    .img-fallback::after { content: attr(data-label); padding:.5rem; font-size:.8rem; font-weight:600; color:#B00410; text-align:center; }
+    .img-fallback { display:grid; place-items:center; background:#241a17; }
+    .img-fallback::after { content: attr(data-label); padding:.5rem; font-size:.8rem; font-weight:600; color:#FFD700; text-align:center; }
   </style>
 
 </body>
