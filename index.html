@@ -130,6 +130,7 @@
     <!-- animated ambient glow -->
     <div class="hero-glow hero-glow-1" aria-hidden="true"></div>
     <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
+    <div class="hero-spotlight" aria-hidden="true"></div>
 
     <div class="relative z-10 w-full max-w-3xl mx-auto px-4 flex flex-col items-center">
       <!-- real brand logo -->
@@ -189,9 +190,9 @@
   <section id="visit" class="bg-[#121010] border-y border-brand-yellow/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 grid lg:grid-cols-2 gap-10 items-center">
       <div class="reveal order-2 lg:order-1">
-        <p class="section-eyebrow">Come see us</p>
-        <h2 class="section-title">Visit Food 101 in Ilorin</h2>
-        <p class="mt-4 max-w-xl text-white/70 leading-relaxed">Dine in or grab it to go — Party Rice, Chicken &amp; Chips, Shawarma, Burgers and more, freshly made every day. Swing by our place, or order in two taps on WhatsApp and we'll bring it to you.</p>
+        <p class="section-eyebrow">Grab &amp; Go</p>
+        <h2 class="section-title">Swing by Food 101 in Ilorin</h2>
+        <p class="mt-4 max-w-xl text-white/70 leading-relaxed">We're a grab-and-go kitchen — everything's made fresh, packed hot, and ready fast. Party Rice, Chicken &amp; Chips, Shawarma, Burgers and more. Order ahead on WhatsApp and pick it up, or we'll deliver straight to you across Ilorin.</p>
         <div class="mt-7 flex flex-wrap gap-3">
           <a href="https://wa.me/2348145066282?text=Hello%20Food%20101%2C%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener"
              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20c65b] text-white font-semibold px-6 py-3 shadow-lg shadow-[#25D366]/30 transition">
@@ -518,6 +519,12 @@
     .hero-glow-2 { width:46vw; height:46vw; max-width:420px; max-height:420px; background:radial-gradient(circle, rgba(255,215,0,.35), transparent 70%); bottom:6%; left:50%; animation: glowPulse 9s ease-in-out .8s infinite; }
     @keyframes glowPulse { 0%,100% { opacity:.35; transform:translateX(-50%) scale(1); } 50% { opacity:.7; transform:translateX(-50%) scale(1.12); } }
 
+    /* ambient depth: warm stage spotlight, faint texture, edge vignette */
+    .hero::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background-image:radial-gradient(rgba(255,215,0,.06) 1px, transparent 1.4px); background-size:22px 22px; opacity:.55; }
+    .hero::after { content:""; position:absolute; inset:0; z-index:0; pointer-events:none; background:radial-gradient(120% 85% at 50% 42%, transparent 52%, rgba(0,0,0,.6) 100%); }
+    .hero-spotlight { position:absolute; z-index:0; left:50%; top:46%; width:80vw; height:80vw; max-width:680px; max-height:680px; transform:translate(-50%,-50%); pointer-events:none; background:radial-gradient(circle, rgba(255,170,40,.28), rgba(255,120,20,.10) 45%, transparent 70%); filter:blur(30px); animation:spotPulse 8s ease-in-out infinite; }
+    @keyframes spotPulse { 0%,100% { opacity:.75; transform:translate(-50%,-50%) scale(1); } 50% { opacity:1; transform:translate(-50%,-50%) scale(1.06); } }
+
     .hero-shine { position:absolute; top:-40%; left:-60%; width:38%; height:180%; z-index:1; background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); pointer-events:none; animation: heroShine 6s ease-in-out 1.8s infinite; }
     @keyframes heroShine { 0% { left:-60%; } 22% { left:135%; } 100% { left:135%; } }
 
@@ -533,7 +540,7 @@
     @keyframes scrollBounce { 0%,100% { transform:translate(-50%,0); } 50% { transform:translate(-50%,7px); } }
 
     @media (prefers-reduced-motion: reduce) {
-      .hero-stage, .hero-glow, .hero-shine, .hero-slide, .hero-cta--wa::after, .hero-dot, .hero-scroll { animation:none !important; }
+      .hero-stage, .hero-glow, .hero-spotlight, .hero-shine, .hero-slide, .hero-cta--wa::after, .hero-dot, .hero-scroll { animation:none !important; }
       .hero-stage { opacity:1; transform:none; }
       .hero-slide { transition:none; }
       .hero-glow { opacity:.5; transform:translateX(-50%); }
