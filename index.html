@@ -148,7 +148,7 @@
       </p>
 
       <!-- LIVE rotating dish showcase: real photos crossfading in sync with the label -->
-      <div id="heroStage" class="hero-stage relative mt-8 w-full max-w-md sm:max-w-lg aspect-[4/3] rounded-3xl overflow-hidden ring-1 ring-brand-yellow/30 shadow-premium">
+      <div id="heroStage" class="hero-stage relative mt-8 w-full max-w-[16rem] sm:max-w-lg aspect-[4/3] rounded-3xl overflow-hidden ring-1 ring-brand-yellow/30 shadow-premium">
         <img src="images/hero-chicken-chips.jpg" alt="Chicken &amp; Chips"      data-name="Chicken &amp; Chips"      class="hero-slide is-active" />
         <img src="images/hero-burger.jpg"         alt="Chicken Burger"          data-name="Chicken Burger"          class="hero-slide" loading="lazy" />
         <img src="images/hero-shawarma.jpg"       alt="Loaded Shawarma"         data-name="Loaded Shawarma"         class="hero-slide" loading="lazy" />
@@ -525,6 +525,12 @@
     @keyframes spotPulse { 0%,100% { opacity:.8; transform:translate(-50%,-50%) scale(1); } 50% { opacity:1; transform:translate(-50%,-50%) scale(1.06); } }
     .hero-rays { position:absolute; z-index:2; left:50%; top:46%; width:120vw; height:120vw; max-width:900px; max-height:900px; transform:translate(-50%,-50%); pointer-events:none; background:repeating-conic-gradient(from 0deg at 50% 50%, rgba(255,215,0,.1) 0deg 6deg, transparent 6deg 18deg); -webkit-mask-image:radial-gradient(circle, #000 8%, rgba(0,0,0,.6) 34%, transparent 66%); mask-image:radial-gradient(circle, #000 8%, rgba(0,0,0,.6) 34%, transparent 66%); filter:blur(1px); animation:raySpin 44s linear infinite; }
     @keyframes raySpin { from { transform:translate(-50%,-50%) rotate(0deg); } to { transform:translate(-50%,-50%) rotate(360deg); } }
+
+    /* mobile: show the whole storefront (no side crop), nudged up; lighter veil so the building reads */
+    @media (max-width: 639px) {
+      .hero-bg { object-fit:contain; object-position:50% 34%; }
+      .hero-bg-veil { background:linear-gradient(to bottom, rgba(18,3,3,.8), rgba(22,6,4,.48) 44%, rgba(13,11,10,.92)); }
+    }
 
     .hero-shine { position:absolute; top:-40%; left:-60%; width:38%; height:180%; z-index:1; background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); pointer-events:none; animation: heroShine 6s ease-in-out 1.8s infinite; }
     @keyframes heroShine { 0% { left:-60%; } 22% { left:135%; } 100% { left:135%; } }
