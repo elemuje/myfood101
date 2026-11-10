@@ -1,0 +1,6 @@
+.git/
+.env*
+tests/
+scripts/
+google-apps-script/
+README.md

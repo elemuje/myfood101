@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#E30613">
+  <title>Food 101 | Admin Dashboard</title>
+  <link rel="icon" href="images/food101-logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/admin.css">
+  <script src="assets/shared.js" defer></script><script src="assets/admin.js" defer></script>
+</head>
+<body>
+  <div id="boot" class="boot" role="status">Opening Food 101 admin…</div>
+  <main id="login" class="login-screen" hidden>
+    <a class="brand" href="/"><img src="images/food101-logo.jpg" alt="Food 101"><span>Food <b>101</b></span></a>
+    <section class="login-card">
+      <p class="eyebrow">FOR THE FOOD 101 TEAM</p><h1>Welcome back.</h1><p class="muted">Sign in to keep your menu fresh.</p>
+      <form id="loginForm">
+        <label for="username">Username</label><input id="username" name="username" autocomplete="username" required maxlength="100" value="food101">
+        <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256">
+        <p id="loginStatus" class="status" role="status" aria-live="polite"></p>
+        <button class="button primary full" id="loginSubmit">Sign in →</button>
+      </form>
+      <a class="back-link" href="/">← Back to the website</a>
+    </section><p class="login-foot">Fresh, Fast, Delicious.</p>
+  </main>
+  <div id="dashboard" class="dashboard" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="/"><img src="images/food101-logo.jpg" alt="Food 101"><span>Food <b>101</b></span></a>
+      <p class="sidebar-label">YOUR RESTAURANT</p><span class="nav-item">▦ &nbsp; Products</span>
+      <a class="nav-item secondary" href="/#feedback" target="_blank" rel="noopener">♡ &nbsp; Customer feedback ↗</a>
+      <a class="nav-item secondary" href="/" target="_blank" rel="noopener">↗ &nbsp; View website</a>
+      <div class="sidebar-bottom"><span class="staff-label">Food 101 team</span><button id="logout" class="button quiet">Sign out</button></div>
+    </aside>
+    <main class="workspace">
+      <header class="topbar"><span>Admin dashboard</span><span class="live-badge"><i></i> FOOD 101</span></header>
+      <div class="workspace-body">
+        <div class="heading-row"><div><p class="eyebrow">A MENU WORTH COMING BACK FOR</p><h1>Your products</h1><p class="muted">Update the meals, prices and pictures your customers see.</p></div><button id="addProduct" class="button primary">+ Add product</button></div>
+        <div class="stats"><div><span>Products on the menu</span><strong id="productCount">—</strong></div><div><span>Food &amp; drink categories</span><strong id="categoryCount">6</strong></div><div><span>Your menu, your way</span><strong class="stat-text">Fresh every day.</strong></div></div>
+        <p id="dashboardStatus" class="status" role="status" aria-live="polite"></p>
+        <section class="catalog-panel" aria-label="Product management">
+          <div class="tools"><div class="search-wrap"><label class="sr-only" for="search">Search products</label><input id="search" type="search" placeholder="Search your menu…"></div><label class="sr-only" for="categoryFilter">Filter category</label><select id="categoryFilter"><option value="all">All categories</option></select><button id="reload" class="button quiet">↻ Refresh</button></div>
+          <div class="table-heading"><span>PRODUCT</span><span>PRICE</span><span>ACTIONS</span></div>
+          <div id="productList" aria-live="polite"></div>
+          <div class="panel-foot"><span id="resultCount"></span><span>Changes appear on the website after you save.</span></div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <dialog id="editor" aria-labelledby="editorTitle">
+    <form id="productForm">
+      <div class="dialog-heading"><div><p class="eyebrow">FOOD 101 MENU</p><h2 id="editorTitle">Add a product</h2></div><button type="button" class="icon-button" id="closeEditor" aria-label="Close product editor">×</button></div>
+      <div class="editor-body">
+        <label for="productName">Product name</label><input id="productName" required maxlength="160" placeholder="e.g. Loaded Chicken Shawarma">
+        <div class="two-columns"><div><label for="productPrice">Price (₦)</label><input id="productPrice" type="number" min="0.01" max="10000000" step="0.01" required placeholder="3000"></div><div><label for="productCategory">Category</label><select id="productCategory" required></select></div></div>
+        <label for="productDescription">Description</label><textarea id="productDescription" rows="3" maxlength="500" placeholder="Tell customers what makes it delicious."></textarea>
+        <label for="productPicture">Product picture</label>
+        <div class="picture-box"><img id="picturePreview" src="images/food101-logo.jpg" alt="Product picture preview"><div><input id="productPicture" type="file" accept="image/jpeg,image/png,image/webp"><p class="hint">JPEG, PNG or WebP · up to 10 MB. Pictures are resized for fast loading.</p></div></div>
+        <label for="productImageUrl">Or paste a picture URL</label><input id="productImageUrl" type="text" maxlength="2000" placeholder="https://…"><p class="hint">Use an HTTPS URL. A selected upload replaces the URL.</p>
+        <p id="editorStatus" class="status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="dialog-actions"><button type="button" id="cancelEditor" class="button quiet">Cancel</button><button id="saveProduct" class="button primary">Save product</button></div>
+    </form>
+  </dialog>
+  <dialog id="deleteDialog" aria-labelledby="deleteTitle">
+    <div class="delete-body"><p class="eyebrow">REMOVE FROM THE MENU</p><h2 id="deleteTitle">Delete this product?</h2><p id="deleteName"></p><p class="muted">Customers will no longer be able to order it from the website.</p><p id="deleteStatus" class="status" role="status"></p></div>
+    <div class="dialog-actions"><button id="cancelDelete" class="button quiet">Keep product</button><button id="confirmDelete" class="button primary">Delete product</button></div>
+  </dialog>
+</body>
+</html>

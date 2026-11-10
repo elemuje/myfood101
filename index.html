@@ -78,6 +78,7 @@
     @keyframes shimmer { to { background-position: -200% 0; } }
     .img-wrap.loaded { animation: none; background: #1c1813; }
   </style>
+  <link rel="stylesheet" href="assets/feedback.css">
 </head>
 <body class="bg-[#0d0b0a] text-[#ece7de] antialiased overflow-x-hidden">
 
@@ -98,6 +99,7 @@
         <li><a href="#gallery" class="hover:text-brand-red transition-colors">Gallery</a></li>
         <li><a href="#testimonials" class="hover:text-brand-red transition-colors">Reviews</a></li>
         <li><a href="#order" class="hover:text-brand-red transition-colors">Order</a></li>
+        <li><a href="#feedback" class="hover:text-brand-red transition-colors">Feedback</a></li>
         <li><a href="#contact" class="hover:text-brand-red transition-colors">Contact</a></li>
       </ul>
 
@@ -120,6 +122,7 @@
         <a href="#gallery" class="mobile-link">Gallery</a>
         <a href="#testimonials" class="mobile-link">Reviews</a>
         <a href="#order" class="mobile-link">Order</a>
+        <a href="#feedback" class="mobile-link">Feedback &amp; Support</a>
         <a href="#contact" class="mobile-link">Contact</a>
       </div>
     </div>
@@ -349,6 +352,34 @@
     </div>
   </section>
 
+  <!-- ============ CUSTOMER FEEDBACK ============ -->
+  <section id="feedback" class="py-20 lg:py-28 bg-[#100d0b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 feedback-layout">
+      <div class="feedback-intro">
+        <p class="section-eyebrow">We’re here to listen</p>
+        <h2 class="section-title">Your experience<br>matters to us.</h2>
+        <p class="mt-5 text-white/60 leading-relaxed">A compliment, a suggestion, or something we could do better? Tell the Food 101 team. Every message helps us serve you better.</p>
+        <div class="feedback-note">Need help with an order right now?<br><a href="https://wa.me/2348145066282" target="_blank" rel="noopener" class="text-brand-yellow font-semibold">Chat with us on WhatsApp →</a></div>
+        <p class="mt-6 text-xs text-white/40">Fresh, Fast, Delicious. And always getting better.</p>
+      </div>
+      <form id="feedbackForm" class="feedback-card">
+        <div class="feedback-fields">
+          <div><label class="form-label" for="feedbackType">What would you like to do? *</label><select id="feedbackType" name="feedbackType" class="form-input" required><option value="">Choose an option</option><option>Give feedback</option><option>Make a complaint</option><option>Request support or assistance</option><option>Make a suggestion</option><option>Appreciate our service</option></select></div>
+          <div><label class="form-label" for="feedbackCustomer">Have you ordered from us before? *</label><select id="feedbackCustomer" name="customer" class="form-input" required><option value="">Choose an option</option><option value="Yes">Yes, I have</option><option value="No">Not yet</option></select></div>
+        </div>
+        <div class="field"><label class="form-label" for="feedbackTopic">What is your enquiry about?</label><select id="feedbackTopic" name="topic" class="form-input"><option value="">Choose a topic (optional)</option><option>Food quality</option><option>Order or delivery</option><option>Customer service</option><option>Other</option></select></div>
+        <div id="feedbackOtherWrap" class="field" hidden><label for="feedbackOther" class="form-label">Tell us the topic *</label><input id="feedbackOther" name="otherTopic" class="form-input" maxlength="200"></div>
+        <div class="field"><label class="form-label" for="feedbackMessage">Tell us what happened or how we can help *</label><textarea id="feedbackMessage" name="message" class="form-input" rows="5" maxlength="5000" required placeholder="We’re listening. Share your experience with us…"></textarea></div>
+        <div class="field"><label class="form-label" for="feedbackPictures">Any pictures to share? (optional)</label><input id="feedbackPictures" name="pictures" type="file" accept="image/jpeg,image/png,image/webp" multiple class="form-input"><p class="feedback-hint">Up to 5 pictures, 10 MB each. We resize pictures before sending. Attachments are kept private for the Food 101 team.</p><div id="feedbackPreview" class="feedback-preview"></div></div>
+        <div class="field"><label class="form-label" for="feedbackPhone">Your WhatsApp contact (optional)</label><input id="feedbackPhone" name="phone" type="tel" class="form-input" autocomplete="tel" maxlength="40" placeholder="e.g. 0801 234 5678"><p class="feedback-hint">Leave a number if you’d like us to follow up about your message.</p></div>
+        <div class="feedback-honey" aria-hidden="true"><label for="feedbackWebsite">Website</label><input id="feedbackWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+        <p id="feedbackStatus" class="feedback-status" role="status" aria-live="polite"></p>
+        <button id="feedbackSubmit" type="submit" class="btn-primary w-full justify-center mt-6">Send feedback →</button>
+        <p class="feedback-hint text-center mt-4">Your message and pictures go to the Food 101 team. Please avoid sharing passwords or payment details.</p>
+      </form>
+    </div>
+  </section>
+
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="py-20 lg:py-28 bg-[#0d0b0a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -431,7 +462,7 @@
     <div class="border-t border-white/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/50">
         <p>© <span id="year"></span> Food 101. All rights reserved.</p>
-        <p>Made with <span class="text-brand-red">❤</span> in Ilorin, Nigeria.</p>
+        <p><a href="admin" class="hover:text-brand-yellow">Staff login</a> · Made with <span class="text-brand-red">❤</span> in Ilorin, Nigeria.</p>
       </div>
     </div>
   </footer>
@@ -554,308 +585,9 @@
     }
   </style>
 
-  <!-- ============ APP SCRIPT ============ -->
-  <script>
-    const WHATSAPP = '2348145066282';
-    // Direct Google CDN URL (skips the rate-limited drive.google.com/thumbnail redirect)
-    const DRIVE = id => `https://lh3.googleusercontent.com/d/${id}=w1000`;
-    const naira = n => '₦' + n.toLocaleString('en-NG');
-
-    const CATEGORIES = [
-      { id: 'all',      label: 'All' },
-      { id: 'rice',     label: 'Rice' },
-      { id: 'shawarma', label: 'Shawarma' },
-      { id: 'burger',   label: 'Burgers & Chips' },
-      { id: 'sides',    label: 'Sides & Add-ons' },
-      { id: 'snacks',   label: 'Snacks' },
-      { id: 'drinks',   label: 'Ice Cream & Drinks' },
-    ];
-
-    const MENU = [
-      { id: 1,  name: 'Large Plate of Rice & Chicken', price: 3000, cat: 'rice',     img: 'images/large-rice-chicken.jpg', desc: 'Large plate of rice served with grilled chicken' },
-      { id: 2,  name: 'Large Plate of Rice & Fish',    price: 3000, cat: 'rice',     img: 'images/large-rice-fish.jpg', desc: 'Large plate of rice served with fried fish' },
-      { id: 3,  name: 'Large Plate of Rice & Beef',    price: 2200, cat: 'rice',     img: DRIVE('1FNXBMyq3OegPD02rVKBErJwt749al4F0'), desc: 'Large plate of rice served with tender beef' },
-      { id: 4,  name: 'Large Plate of Rice (Plain)',   price: 1900, cat: 'rice',     img: 'images/large-rice-plain.jpg', desc: 'Large plate of rice, plain' },
-      { id: 5,  name: 'Small Plate of Rice & Chicken', price: 2600, cat: 'rice',     img: 'images/small-rice-chicken.jpg', desc: 'Small plate of rice served with grilled chicken' },
-      { id: 6,  name: 'Small Plate of Rice & Fish',    price: 2600, cat: 'rice',     img: DRIVE('1it_PfmMq-Bqj1rb-1k3U-z97vbRguBkZ'), desc: 'Small plate of rice served with fried fish' },
-      { id: 7,  name: 'Small Plate of Rice & Beef',    price: 1800, cat: 'rice',     img: DRIVE('12eItHFxpOL_hPn7OQKWgUxPEhEjEYb4F'), desc: 'Small plate of rice served with tender beef' },
-      { id: 8,  name: 'Small Plate of Rice (Plain)',   price: 1500, cat: 'rice',     img: DRIVE('186Jx1DQjwJ1y1NEknZbY_u9GcQeViQru'), desc: 'Small plate of rice, plain' },
-      { id: 9,  name: 'Chicken Shawarma',      price: 2700, cat: 'shawarma', img: DRIVE('1qIBaV1WDk0CZnHUTeihBIm0Va-CsbBvK'), desc: 'Grilled chicken wrap with sauces' },
-      { id: 10, name: 'Loaded Chicken Shawarma', price: 3000, cat: 'shawarma', img: DRIVE('1xG9AZc_sADWZnpdRZG8rluNqsxBY1TUY'), desc: 'Extra-loaded chicken shawarma wrap' },
-      { id: 11, name: 'Beef Shawarma',         price: 2500, cat: 'shawarma', img: DRIVE('1gfxlhLhwSKjmKFXM-1SGoScL1NhWDvWX'), desc: 'Grilled beef wrap with sauces' },
-      { id: 12, name: 'Loaded Beef Shawarma',  price: 2800, cat: 'shawarma', img: DRIVE('1rZZz3eGe6SG6RsgLboKRaCB0brOegaZo'), desc: 'Extra-loaded beef shawarma wrap' },
-      { id: 13, name: 'Chicken (Add-on)',      price: 1500, cat: 'sides',    img: DRIVE('1UHgbEOeRt7IqNKQBUFCyNwXhtt2rnEQN'), desc: 'Extra portion of grilled chicken' },
-      { id: 14, name: 'Fish (Add-on)',         price: 1500, cat: 'sides',    img: DRIVE('1EVfMJx9DEp4FBIQQyd8ohBlEinRiq7IY'), desc: 'Extra portion of fried fish' },
-      { id: 15, name: 'Beef (Add-on)',         price: 300,  cat: 'sides',    img: DRIVE('1nCiqXnLtyeKOAFY1HnhGKbczo9rkbl2_'), desc: 'Extra portion of beef' },
-      { id: 16, name: 'Coleslaw',              price: 400,  cat: 'sides',    img: DRIVE('1crmqzR8FzAMrX4OpIJicMrZDBGMgVkU4'), desc: 'Fresh creamy coleslaw side' },
-      { id: 17, name: 'Plantain',              price: 100,  cat: 'sides',    img: DRIVE('1-xj_LcdJNx1IMkn4GzVTg9HHBKEayIBi'), desc: 'Sweet fried plantain (dodo)' },
-      { id: 18, name: 'Classic Chicken & Chip Pack', price: 3500, cat: 'burger', img: DRIVE('19xMZTEMP7E1XzEpSfYHSmB7vPa8L1WHX'), desc: 'Crispy chicken with a portion of chips' },
-      { id: 19, name: 'Jumbo Chicken & Chip Pack',   price: 4500, cat: 'burger', img: DRIVE('1Qe98qZD-uYDgGCFOMN-wZpSZxyitWAKk'), desc: 'Bigger chicken & chips for big appetites' },
-      { id: 20, name: 'Chicken Burger',        price: 3500, cat: 'burger',   img: DRIVE('1qnZL1D2LzhUdLnK45s4KIqbVXAyP82Kz'), desc: 'Juicy chicken fillet burger' },
-      { id: 21, name: 'Beef Burger',           price: 3500, cat: 'burger',   img: DRIVE('1TnVhmIun09hC4HaKpJXnqublIIpmHKgT'), desc: 'Flame-grilled beef patty burger' },
-      { id: 22, name: 'Double Stack Burger',   price: 4500, cat: 'burger',   img: DRIVE('1-OXujc_VJMhhDNNCxdAlXQmU-ggsEL8O'), desc: 'Double patty, double the flavour' },
-      { id: 23, name: 'Chicken Pie',           price: 600,  cat: 'snacks',   img: DRIVE('1cW26r-w8nvUsfDjkE4DTPASPjpL9XzHt'), desc: 'Flaky pastry filled with chicken' },
-      { id: 24, name: 'Meat Pie',              price: 600,  cat: 'snacks',   img: DRIVE('1GrP0yhnIxMOZllVbwkVPXyB2C9Fp_qrv'), desc: 'Classic Nigerian meat pie' },
-      { id: 25, name: 'Egg Roll',              price: 500,  cat: 'snacks',   img: DRIVE('1duw3pXHCAmV_4_FiMwB99hEjba0skjwx'), desc: 'Boiled egg wrapped in dough' },
-      { id: 26, name: 'Doughnut',              price: 400,  cat: 'snacks',   img: 'images/doughnut.jpg', desc: 'Soft sugared doughnut' },
-      { id: 27, name: 'Cone Ice Cream',        price: 500,  cat: 'drinks',   img: DRIVE('1qYqrEHHJ8I6Ev8S9R3rXceMOtZX9xRJl'), desc: 'Creamy ice cream in a crispy cone' },
-      { id: 28, name: 'Ice Cream Cup (130 ml)',price: 1000, cat: 'drinks',   img: DRIVE('1FzII7D31-fTZ7YMNaDuPXhWW7wrWXHVQ'), desc: 'Ice cream cup — 130 ml' },
-      { id: 29, name: 'Ice Cream Cup (250 ml)',price: 1500, cat: 'drinks',   img: DRIVE('1G1LYLQBtF2mQ6GlOor6rKq4vO3HVZbe3'), desc: 'Ice cream cup — 250 ml' },
-      { id: 30, name: 'Ice Cream Cup (500 ml)',price: 2300, cat: 'drinks',   img: DRIVE('1S6mUZiPT5ECxWcFspLfKVMARmi5Ls-Na'), desc: 'Ice cream cup — 500 ml, sharing size' },
-      { id: 31, name: 'Milkshakes',            price: 4200, cat: 'drinks',   img: DRIVE('1pWAkBLZfgz5dmxu_uCr8uMn13tqgiqmu'), desc: 'Thick, creamy milkshake' },
-    ];
-
-    // ---------- state ----------
-    const cart = {}; // id -> qty
-    let activeCat = 'all';
-
-    // ---------- menu render ----------
-    const grid = document.getElementById('menuGrid');
-    const filters = document.getElementById('filters');
-
-    function cardHTML(item) {
-      const catLabel = (CATEGORIES.find(c => c.id === item.cat) || {}).label || '';
-      return `
-        <article class="menu-card" data-cat="${item.cat}">
-          <div class="img-wrap relative aspect-[4/3] overflow-hidden">
-            <img src="${item.img}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer"
-                 class="card-img h-full w-full object-cover"
-                 onload="this.parentElement.classList.add('loaded')"
-                 onerror="this.parentElement.classList.add('loaded');this.style.display='none';this.parentElement.classList.add('img-fallback');this.parentElement.dataset.label='${item.name.replace(/'/g,'')}'" />
-            <span class="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 bg-black/55 backdrop-blur-sm text-brand-yellow border border-brand-yellow/40 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full">${catLabel}</span>
-            <span class="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-brand-yellow text-brand-ink text-[11px] sm:text-[12px] font-bold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow">${naira(item.price)}</span>
-          </div>
-          <div class="p-3 sm:p-4 flex flex-col flex-1">
-            <div class="flex-1">
-              <h3 class="font-semibold text-[13px] sm:text-[15px] leading-snug text-white">${item.name}</h3>
-              <p class="mt-1 text-sm text-white/50 line-clamp-2 hidden sm:block">${item.desc}</p>
-            </div>
-            <button data-add="${item.id}" class="mt-3 sm:mt-4 btn-primary w-full justify-center !py-2 sm:!py-2.5 !px-2 text-xs sm:text-sm">
-              Add to Cart
-            </button>
-          </div>
-        </article>`;
-    }
-
-    function renderMenu() {
-      const items = activeCat === 'all' ? MENU : MENU.filter(m => m.cat === activeCat);
-      grid.innerHTML = items.map(cardHTML).join('');
-      revealObserve();
-    }
-
-    function renderFilters() {
-      filters.innerHTML = CATEGORIES.map(c =>
-        `<button class="chip ${c.id === activeCat ? 'active' : ''}" data-cat="${c.id}">${c.label}</button>`
-      ).join('');
-    }
-
-    filters.addEventListener('click', e => {
-      const btn = e.target.closest('[data-cat]');
-      if (!btn) return;
-      activeCat = btn.dataset.cat;
-      renderFilters();
-      renderMenu();
-    });
-
-    grid.addEventListener('click', e => {
-      const btn = e.target.closest('[data-add]');
-      if (!btn) return;
-      addToCart(+btn.dataset.add);
-    });
-
-    // ---------- gallery ----------
-    const galleryPicks = [1, 9, 20, 18, 11, 31, 24, 27];
-    document.getElementById('gallery-grid').innerHTML = galleryPicks.map((id, i) => {
-      const it = MENU.find(m => m.id === id);
-      const span = i % 5 === 0 ? 'row-span-2' : '';
-      return `<div class="img-wrap relative overflow-hidden rounded-2xl ${span} aspect-square group">
-        <img src="${it.img}" alt="${it.name}" loading="lazy" referrerpolicy="no-referrer"
-             class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-             onload="this.parentElement.classList.add('loaded')"
-             onerror="this.parentElement.classList.add('loaded','img-fallback');this.style.display='none';this.parentElement.dataset.label='${it.name.replace(/'/g,'')}'" />
-        <span class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">${it.name}</span>
-      </div>`;
-    }).join('');
-
-    // ---------- cart ----------
-    const cartBadge = document.getElementById('cartBadge');
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartTotalEl = document.getElementById('cartTotal');
-    const orderSummary = document.getElementById('orderSummary');
-    const orderTotalEl = document.getElementById('orderTotal');
-
-    function cartCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
-    function cartTotal() { return Object.entries(cart).reduce((sum, [id, q]) => sum + MENU.find(m => m.id === +id).price * q, 0); }
-
-    function addToCart(id) {
-      cart[id] = (cart[id] || 0) + 1;
-      updateCart();
-      const item = MENU.find(m => m.id === id);
-      showToast(`${item.name} added`);
-    }
-    function changeQty(id, d) {
-      cart[id] = (cart[id] || 0) + d;
-      if (cart[id] <= 0) delete cart[id];
-      updateCart();
-    }
-    function removeItem(id) { delete cart[id]; updateCart(); }
-
-    function updateCart() {
-      const count = cartCount();
-      cartBadge.textContent = count;
-      cartBadge.style.transform = count ? 'scale(1)' : 'scale(0)';
-
-      // drawer
-      if (!count) {
-        cartItemsEl.innerHTML = `<div class="h-full min-h-[40vh] flex flex-col items-center justify-center text-center text-white/45">
-          <span class="text-5xl">🛒</span>
-          <p class="mt-4 font-medium">Your cart is empty</p>
-          <p class="text-sm">Add some delicious meals to get started.</p>
-        </div>`;
-      } else {
-        cartItemsEl.innerHTML = Object.entries(cart).map(([id, q]) => {
-          const m = MENU.find(x => x.id === +id);
-          return `<div class="flex gap-3 items-center">
-            <div class="img-wrap h-16 w-16 rounded-xl overflow-hidden flex-none">
-              <img src="${m.img}" alt="${m.name}" referrerpolicy="no-referrer" class="h-full w-full object-cover" onload="this.parentElement.classList.add('loaded')" onerror="this.parentElement.classList.add('loaded')" />
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium text-sm truncate">${m.name}</p>
-              <p class="text-brand-red font-semibold text-sm">${naira(m.price)}</p>
-              <div class="mt-1 flex items-center gap-2">
-                <button class="qty-btn" data-dec="${id}">−</button>
-                <span class="w-6 text-center text-sm font-semibold">${q}</span>
-                <button class="qty-btn" data-inc="${id}">+</button>
-                <button class="ml-auto text-xs text-white/45 hover:text-brand-red" data-rem="${id}">Remove</button>
-              </div>
-            </div>
-          </div>`;
-        }).join('');
-      }
-      cartTotalEl.textContent = naira(cartTotal());
-
-      // order summary (checkout form)
-      if (!count) {
-        orderSummary.innerHTML = `<p class="text-white/45">No items yet — add meals from the menu above.</p>`;
-      } else {
-        orderSummary.innerHTML = Object.entries(cart).map(([id, q]) => {
-          const m = MENU.find(x => x.id === +id);
-          return `<div class="flex justify-between gap-2"><span class="text-white/65">${m.name} × ${q}</span><span class="font-medium">${naira(m.price * q)}</span></div>`;
-        }).join('');
-      }
-      orderTotalEl.textContent = naira(cartTotal());
-    }
-
-    cartItemsEl.addEventListener('click', e => {
-      const inc = e.target.closest('[data-inc]'); const dec = e.target.closest('[data-dec]'); const rem = e.target.closest('[data-rem]');
-      if (inc) changeQty(+inc.dataset.inc, 1);
-      if (dec) changeQty(+dec.dataset.dec, -1);
-      if (rem) removeItem(+rem.dataset.rem);
-    });
-
-    // ---------- cart drawer open/close ----------
-    const overlay = document.getElementById('cartOverlay');
-    const drawer = document.getElementById('cartDrawer');
-    function openCart() { overlay.classList.remove('opacity-0', 'pointer-events-none'); drawer.classList.remove('translate-x-full'); document.body.style.overflow = 'hidden'; }
-    function closeCart() { overlay.classList.add('opacity-0', 'pointer-events-none'); drawer.classList.add('translate-x-full'); document.body.style.overflow = ''; }
-    document.getElementById('cartBtn').addEventListener('click', openCart);
-    document.getElementById('closeCart').addEventListener('click', closeCart);
-    overlay.addEventListener('click', closeCart);
-    document.getElementById('goToCheckout').addEventListener('click', closeCart);
-    document.getElementById('openCartFromForm').addEventListener('click', openCart);
-
-    // ---------- toast ----------
-    const toast = document.getElementById('toast');
-    const toastMsg = document.getElementById('toastMsg');
-    let toastTimer;
-    function showToast(msg) {
-      toastMsg.textContent = msg;
-      toast.classList.remove('translate-y-24', 'opacity-0');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 1800);
-    }
-
-    // ---------- checkout via WhatsApp ----------
-    document.getElementById('orderForm').addEventListener('submit', e => {
-      e.preventDefault();
-      if (!cartCount()) { showToast('Your cart is empty'); openCart(); return; }
-      const f = e.target;
-      const type = f.type.value;
-      const lines = Object.entries(cart).map(([id, q], i) => {
-        const m = MENU.find(x => x.id === +id);
-        return `${i + 1}. ${m.name} x${q} — ${naira(m.price * q)}`;
-      });
-      let msg = `*New Order — Food 101*%0A%0A`;
-      msg += lines.join('%0A');
-      msg += `%0A%0A*Total: ${naira(cartTotal())}*`;
-      msg += `%0A%0A*Name:* ${f.name.value || '-'}`;
-      msg += `%0A*Phone:* ${f.phone.value || '-'}`;
-      msg += `%0A*Order type:* ${type}`;
-      msg += `%0A*Branch:* ${f.branch.value}`;
-      if (type === 'Delivery') msg += `%0A*Address:* ${f.address.value || '-'}`;
-      if (f.notes.value) msg += `%0A*Notes:* ${f.notes.value}`;
-      msg = encodeURIComponent(decodeURIComponent(msg)); // ensure fully encoded once
-      window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
-    });
-
-    // toggle address field on order type
-    document.getElementById('fType').addEventListener('change', e => {
-      document.getElementById('addressWrap').style.display = e.target.value === 'Pickup' ? 'none' : '';
-    });
-
-    // ---------- mobile menu ----------
-    const mobileMenu = document.getElementById('mobileMenu');
-    document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
-
-    // navbar shadow on scroll
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) nav.classList.add('shadow-md'); else nav.classList.remove('shadow-md');
-    });
-
-    // ---------- reveal on scroll ----------
-    let io;
-    function revealObserve() {
-      if (!io) io = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
-    }
-
-    // ---------- hero live showcase (photo + label crossfade in sync) ----------
-    (function () {
-      const stage = document.getElementById('heroStage');
-      const label = document.getElementById('heroRotator');
-      if (!stage || !label) return;
-      const slides = Array.prototype.slice.call(stage.querySelectorAll('.hero-slide'));
-      if (slides.length < 2) return;
-      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return; // honour reduced-motion: keep the first dish static
-      const names = slides.map(s => s.getAttribute('data-name') || s.alt || '');
-      let i = 0;
-      setInterval(() => {
-        const next = (i + 1) % slides.length;
-        slides[i].classList.remove('is-active');
-        slides[next].classList.add('is-active');
-        label.style.opacity = '0';
-        label.style.transform = 'translateY(6px)';
-        setTimeout(() => {
-          label.textContent = names[next];
-          label.style.opacity = '1';
-          label.style.transform = 'translateY(0)';
-        }, 250);
-        i = next;
-      }, 3200);
-    })();
-
-    // ---------- init ----------
-    document.getElementById('year').textContent = '2026';
-    renderFilters();
-    renderMenu();
-    updateCart();
-    revealObserve();
-  </script>
+  <script src="assets/shared.js" defer></script>
+  <script src="assets/site.js" defer></script>
+  <script src="assets/feedback.js" defer></script>
 
   <!-- fallback label for broken images -->
   <style>

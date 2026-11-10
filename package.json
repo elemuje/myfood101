@@ -1,0 +1,13 @@
+{
+  "name": "food101",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:configured": "node --env-file=.env.local scripts/dev.mjs",
+    "demo": "node scripts/dev.mjs --demo",
+    "test": "node --test tests/api.test.mjs tests/bridge.test.mjs",
+    "admin:password": "node scripts/admin-password.mjs"
+  }
+}

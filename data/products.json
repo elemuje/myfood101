@@ -1,0 +1,282 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "rice",
+      "label": "Rice"
+    },
+    {
+      "id": "shawarma",
+      "label": "Shawarma"
+    },
+    {
+      "id": "burger",
+      "label": "Burgers & Chips"
+    },
+    {
+      "id": "sides",
+      "label": "Sides & Add-ons"
+    },
+    {
+      "id": "snacks",
+      "label": "Snacks"
+    },
+    {
+      "id": "drinks",
+      "label": "Ice Cream & Drinks"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Large Plate of Rice & Chicken",
+      "price": 3000,
+      "cat": "rice",
+      "img": "images/large-rice-chicken.jpg",
+      "desc": "Large plate of rice served with grilled chicken"
+    },
+    {
+      "id": 2,
+      "name": "Large Plate of Rice & Fish",
+      "price": 3000,
+      "cat": "rice",
+      "img": "images/large-rice-fish.jpg",
+      "desc": "Large plate of rice served with fried fish"
+    },
+    {
+      "id": 3,
+      "name": "Large Plate of Rice & Beef",
+      "price": 2200,
+      "cat": "rice",
+      "img": "https://lh3.googleusercontent.com/d/1FNXBMyq3OegPD02rVKBErJwt749al4F0=w1000",
+      "desc": "Large plate of rice served with tender beef"
+    },
+    {
+      "id": 4,
+      "name": "Large Plate of Rice (Plain)",
+      "price": 1900,
+      "cat": "rice",
+      "img": "images/large-rice-plain.jpg",
+      "desc": "Large plate of rice, plain"
+    },
+    {
+      "id": 5,
+      "name": "Small Plate of Rice & Chicken",
+      "price": 2600,
+      "cat": "rice",
+      "img": "images/small-rice-chicken.jpg",
+      "desc": "Small plate of rice served with grilled chicken"
+    },
+    {
+      "id": 6,
+      "name": "Small Plate of Rice & Fish",
+      "price": 2600,
+      "cat": "rice",
+      "img": "https://lh3.googleusercontent.com/d/1it_PfmMq-Bqj1rb-1k3U-z97vbRguBkZ=w1000",
+      "desc": "Small plate of rice served with fried fish"
+    },
+    {
+      "id": 7,
+      "name": "Small Plate of Rice & Beef",
+      "price": 1800,
+      "cat": "rice",
+      "img": "https://lh3.googleusercontent.com/d/12eItHFxpOL_hPn7OQKWgUxPEhEjEYb4F=w1000",
+      "desc": "Small plate of rice served with tender beef"
+    },
+    {
+      "id": 8,
+      "name": "Small Plate of Rice (Plain)",
+      "price": 1500,
+      "cat": "rice",
+      "img": "https://lh3.googleusercontent.com/d/186Jx1DQjwJ1y1NEknZbY_u9GcQeViQru=w1000",
+      "desc": "Small plate of rice, plain"
+    },
+    {
+      "id": 9,
+      "name": "Chicken Shawarma",
+      "price": 2700,
+      "cat": "shawarma",
+      "img": "https://lh3.googleusercontent.com/d/1qIBaV1WDk0CZnHUTeihBIm0Va-CsbBvK=w1000",
+      "desc": "Grilled chicken wrap with sauces"
+    },
+    {
+      "id": 10,
+      "name": "Loaded Chicken Shawarma",
+      "price": 3000,
+      "cat": "shawarma",
+      "img": "https://lh3.googleusercontent.com/d/1xG9AZc_sADWZnpdRZG8rluNqsxBY1TUY=w1000",
+      "desc": "Extra-loaded chicken shawarma wrap"
+    },
+    {
+      "id": 11,
+      "name": "Beef Shawarma",
+      "price": 2500,
+      "cat": "shawarma",
+      "img": "https://lh3.googleusercontent.com/d/1gfxlhLhwSKjmKFXM-1SGoScL1NhWDvWX=w1000",
+      "desc": "Grilled beef wrap with sauces"
+    },
+    {
+      "id": 12,
+      "name": "Loaded Beef Shawarma",
+      "price": 2800,
+      "cat": "shawarma",
+      "img": "https://lh3.googleusercontent.com/d/1rZZz3eGe6SG6RsgLboKRaCB0brOegaZo=w1000",
+      "desc": "Extra-loaded beef shawarma wrap"
+    },
+    {
+      "id": 13,
+      "name": "Chicken (Add-on)",
+      "price": 1500,
+      "cat": "sides",
+      "img": "https://lh3.googleusercontent.com/d/1UHgbEOeRt7IqNKQBUFCyNwXhtt2rnEQN=w1000",
+      "desc": "Extra portion of grilled chicken"
+    },
+    {
+      "id": 14,
+      "name": "Fish (Add-on)",
+      "price": 1500,
+      "cat": "sides",
+      "img": "https://lh3.googleusercontent.com/d/1EVfMJx9DEp4FBIQQyd8ohBlEinRiq7IY=w1000",
+      "desc": "Extra portion of fried fish"
+    },
+    {
+      "id": 15,
+      "name": "Beef (Add-on)",
+      "price": 300,
+      "cat": "sides",
+      "img": "https://lh3.googleusercontent.com/d/1nCiqXnLtyeKOAFY1HnhGKbczo9rkbl2_=w1000",
+      "desc": "Extra portion of beef"
+    },
+    {
+      "id": 16,
+      "name": "Coleslaw",
+      "price": 400,
+      "cat": "sides",
+      "img": "https://lh3.googleusercontent.com/d/1crmqzR8FzAMrX4OpIJicMrZDBGMgVkU4=w1000",
+      "desc": "Fresh creamy coleslaw side"
+    },
+    {
+      "id": 17,
+      "name": "Plantain",
+      "price": 100,
+      "cat": "sides",
+      "img": "https://lh3.googleusercontent.com/d/1-xj_LcdJNx1IMkn4GzVTg9HHBKEayIBi=w1000",
+      "desc": "Sweet fried plantain (dodo)"
+    },
+    {
+      "id": 18,
+      "name": "Classic Chicken & Chip Pack",
+      "price": 3500,
+      "cat": "burger",
+      "img": "https://lh3.googleusercontent.com/d/19xMZTEMP7E1XzEpSfYHSmB7vPa8L1WHX=w1000",
+      "desc": "Crispy chicken with a portion of chips"
+    },
+    {
+      "id": 19,
+      "name": "Jumbo Chicken & Chip Pack",
+      "price": 4500,
+      "cat": "burger",
+      "img": "https://lh3.googleusercontent.com/d/1Qe98qZD-uYDgGCFOMN-wZpSZxyitWAKk=w1000",
+      "desc": "Bigger chicken & chips for big appetites"
+    },
+    {
+      "id": 20,
+      "name": "Chicken Burger",
+      "price": 3500,
+      "cat": "burger",
+      "img": "https://lh3.googleusercontent.com/d/1qnZL1D2LzhUdLnK45s4KIqbVXAyP82Kz=w1000",
+      "desc": "Juicy chicken fillet burger"
+    },
+    {
+      "id": 21,
+      "name": "Beef Burger",
+      "price": 3500,
+      "cat": "burger",
+      "img": "https://lh3.googleusercontent.com/d/1TnVhmIun09hC4HaKpJXnqublIIpmHKgT=w1000",
+      "desc": "Flame-grilled beef patty burger"
+    },
+    {
+      "id": 22,
+      "name": "Double Stack Burger",
+      "price": 4500,
+      "cat": "burger",
+      "img": "https://lh3.googleusercontent.com/d/1-OXujc_VJMhhDNNCxdAlXQmU-ggsEL8O=w1000",
+      "desc": "Double patty, double the flavour"
+    },
+    {
+      "id": 23,
+      "name": "Chicken Pie",
+      "price": 600,
+      "cat": "snacks",
+      "img": "https://lh3.googleusercontent.com/d/1cW26r-w8nvUsfDjkE4DTPASPjpL9XzHt=w1000",
+      "desc": "Flaky pastry filled with chicken"
+    },
+    {
+      "id": 24,
+      "name": "Meat Pie",
+      "price": 600,
+      "cat": "snacks",
+      "img": "https://lh3.googleusercontent.com/d/1GrP0yhnIxMOZllVbwkVPXyB2C9Fp_qrv=w1000",
+      "desc": "Classic Nigerian meat pie"
+    },
+    {
+      "id": 25,
+      "name": "Egg Roll",
+      "price": 500,
+      "cat": "snacks",
+      "img": "https://lh3.googleusercontent.com/d/1duw3pXHCAmV_4_FiMwB99hEjba0skjwx=w1000",
+      "desc": "Boiled egg wrapped in dough"
+    },
+    {
+      "id": 26,
+      "name": "Doughnut",
+      "price": 400,
+      "cat": "snacks",
+      "img": "images/doughnut.jpg",
+      "desc": "Soft sugared doughnut"
+    },
+    {
+      "id": 27,
+      "name": "Cone Ice Cream",
+      "price": 500,
+      "cat": "drinks",
+      "img": "https://lh3.googleusercontent.com/d/1qYqrEHHJ8I6Ev8S9R3rXceMOtZX9xRJl=w1000",
+      "desc": "Creamy ice cream in a crispy cone"
+    },
+    {
+      "id": 28,
+      "name": "Ice Cream Cup (130 ml)",
+      "price": 1000,
+      "cat": "drinks",
+      "img": "https://lh3.googleusercontent.com/d/1FzII7D31-fTZ7YMNaDuPXhWW7wrWXHVQ=w1000",
+      "desc": "Ice cream cup — 130 ml"
+    },
+    {
+      "id": 29,
+      "name": "Ice Cream Cup (250 ml)",
+      "price": 1500,
+      "cat": "drinks",
+      "img": "https://lh3.googleusercontent.com/d/1G1LYLQBtF2mQ6GlOor6rKq4vO3HVZbe3=w1000",
+      "desc": "Ice cream cup — 250 ml"
+    },
+    {
+      "id": 30,
+      "name": "Ice Cream Cup (500 ml)",
+      "price": 2300,
+      "cat": "drinks",
+      "img": "https://lh3.googleusercontent.com/d/1S6mUZiPT5ECxWcFspLfKVMARmi5Ls-Na=w1000",
+      "desc": "Ice cream cup — 500 ml, sharing size"
+    },
+    {
+      "id": 31,
+      "name": "Milkshakes",
+      "price": 4200,
+      "cat": "drinks",
+      "img": "https://lh3.googleusercontent.com/d/1pWAkBLZfgz5dmxu_uCr8uMn13tqgiqmu=w1000",
+      "desc": "Thick, creamy milkshake"
+    }
+  ]
+}
