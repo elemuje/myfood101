@@ -4,8 +4,11 @@ var SPREADSHEET_ID = '18j6KNPxLlEoiuBScGOdcopDwFrpwhmNrmC9xSlNx6tI';
 var RESPONSE_SHEET_ID = 763732222;
 var LOG_SHEET = '_Food101WebsiteSubmissions';
 var PRODUCT_SHEET = '_Food101Products';
+var STORAGE_ACCOUNT = 'healthy101food@gmail.com';
+var FEEDBACK_FOLDER_PROPERTY = 'FOOD101_HEALTHY_PICTURE_FOLDER_ID';
+var PRODUCT_FOLDER_PROPERTY = 'FOOD101_HEALTHY_PRODUCT_FOLDER_ID';
 
-function doGet() { return reply_({ ok: true, service: 'Food 101 feedback bridge' }); }
+function doGet() { return reply_({ ok: true, service: 'Food 101 feedback bridge', version: 'healthy-storage-v1' }); }
 function reply_(value) { return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(ContentService.MimeType.JSON); }
 function sameSecret_(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string' || b.length < 32) return false;
@@ -38,18 +41,60 @@ function logSheet_() {
   }
   return sheet;
 }
-function pictureFolder_() {
+function storageIdentity_() {
+  // Inspect the OAuth token's account, rather than the person viewing the editor.
+  // Drive's existing drive.file scope supports this check; no extra scope is needed.
+  var about = api_('https://www.googleapis.com/drive/v3/about?fields=user(emailAddress)');
+  var account = String(about.user && about.user.emailAddress || '').toLowerCase();
+  if (account !== STORAGE_ACCOUNT) throw new Error('Upload storage must run as ' + STORAGE_ACCOUNT + '. Create the web app deployment from that account with Execute as Me.');
+  return account;
+}
+function storageFolderInfo_(id) {
+  var folder = api_('https://www.googleapis.com/drive/v3/files/' + encodeURIComponent(id) + '?fields=id,mimeType,ownedByMe,trashed');
+  if (!folder.ownedByMe || folder.trashed || folder.mimeType !== 'application/vnd.google-apps.folder') throw new Error('The configured upload folder must be an active folder owned by ' + STORAGE_ACCOUNT + '.');
+  return folder;
+}
+function storageFolder_(property, name) {
+  storageIdentity_();
   var properties = PropertiesService.getScriptProperties();
-  var id = properties.getProperty('PICTURE_FOLDER_ID');
+  // Separate keys preserve the old deployment while the website is switched over.
+  var id = properties.getProperty(property);
   if (!id) {
     var folder = api_('https://www.googleapis.com/drive/v3/files?fields=id', {
       method: 'post', contentType: 'application/json', payload: JSON.stringify({
-        name: 'Food 101 customer feedback pictures', mimeType: 'application/vnd.google-apps.folder'
+        name: name, mimeType: 'application/vnd.google-apps.folder'
       })
     });
-    id = folder.id; properties.setProperty('PICTURE_FOLDER_ID', id);
+    id = folder.id;
+    if (!id) throw new Error('Google did not return an upload folder ID.');
+    properties.setProperty(property, id);
   }
+  storageFolderInfo_(id);
   return id;
+}
+function pictureFolder_() { return storageFolder_(FEEDBACK_FOLDER_PROPERTY, 'Food 101 customer feedback pictures'); }
+function productFolder_() { return storageFolder_(PRODUCT_FOLDER_PROPERTY, 'Food 101 product pictures'); }
+function storageCheck_() {
+  var account = storageIdentity_(), properties = PropertiesService.getScriptProperties();
+  var feedbackId = properties.getProperty(FEEDBACK_FOLDER_PROPERTY);
+  var productId = properties.getProperty(PRODUCT_FOLDER_PROPERTY);
+  return {
+    ok: true, account: account,
+    feedbackFolder: feedbackId ? storageFolderInfo_(feedbackId) : null,
+    productFolder: productId ? storageFolderInfo_(productId) : null
+  };
+}
+function prepareFood101Storage() {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(30000);
+    pictureFolder_(); productFolder_();
+    var result = storageCheck_();
+    console.log('Food101 storage ready: ' + result.account);
+    console.log('Feedback folder: https://drive.google.com/drive/folders/' + result.feedbackFolder.id);
+    console.log('Product folder: https://drive.google.com/drive/folders/' + result.productFolder.id);
+    return result;
+  } finally { if (lock.hasLock()) lock.releaseLock(); }
 }
 function upload_(picture, folder, reference, index) {
   var extension = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' }[picture.mime];
@@ -97,11 +142,7 @@ function catalog_(value, lock) {
     if (value.picture) {
       var item = next.filter(function(product) { return product.id === value.picture.productId; })[0];
       if (!item) throw new Error('Picture product missing');
-      var properties = PropertiesService.getScriptProperties(), folderId = properties.getProperty('PRODUCT_FOLDER_ID');
-      if (!folderId) {
-        folderId = api_('https://www.googleapis.com/drive/v3/files?fields=id', { method: 'post', contentType: 'application/json', payload: JSON.stringify({ name: 'Food 101 product pictures', mimeType: 'application/vnd.google-apps.folder' }) }).id;
-        properties.setProperty('PRODUCT_FOLDER_ID', folderId);
-      }
+      var folderId = productFolder_();
       photo = upload_(value.picture, folderId, 'product-' + Utilities.getUuid(), 0);
       api_('https://www.googleapis.com/drive/v3/files/' + photo.id + '/permissions', { method: 'post', contentType: 'application/json', payload: JSON.stringify({ type: 'anyone', role: 'reader' }) });
       item.img = 'https://lh3.googleusercontent.com/d/' + photo.id + '=w1000';
@@ -131,6 +172,7 @@ function doPost(e) {
     var value = JSON.parse(e.postData.contents);
     if (!sameSecret_(value.secret, PropertiesService.getScriptProperties().getProperty('BRIDGE_SECRET'))) return reply_({ ok: false, code: 'unauthorized' });
     authorized = true;
+    if (value.action === 'storage.check') return reply_(storageCheck_());
     if (value.action === 'catalog.get' || value.action === 'catalog.save') return reply_(catalog_(value, lock));
     var types = ['Give feedback', 'Make a complaint', 'Request support or assistance', 'Make a suggestion', 'Appreciate our service'];
     if (!/^[a-f0-9-]{36}$/i.test(value.id || '') || types.indexOf(value.type) === -1 || ['Yes', 'No'].indexOf(value.customer) === -1 || typeof value.message !== 'string' || !value.message.trim() || value.message.length > 5000 || !Array.isArray(value.pictures) || value.pictures.length > 5) return reply_({ ok: false, code: 'invalid_fields' });

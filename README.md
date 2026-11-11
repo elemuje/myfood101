@@ -39,11 +39,11 @@ For a configured local server, copy `.env.example` to `.env.local`, set `SITE_OR
 
    Set Config variables `ADMIN_USERNAME=food101` and `SITE_ORIGIN=https://www.myfood101.org`.
 
-3. Create a Google Apps Script project under the account that can edit the response spreadsheet. Paste `google-apps-script/Code.gs` into `Code.gs`. Enable the manifest in Project Settings and replace `appsscript.json` with the supplied manifest. The explicit scopes are spreadsheets, Drive files created by this app, and external HTTP requests. The script only targets the spreadsheet ID and sheet gid above.
+3. Create or open the Google Apps Script project while signed in to `healthy101food@gmail.com`, which must be able to edit the response spreadsheet. Paste `google-apps-script/Code.gs` into `Code.gs`. Enable the manifest in Project Settings and replace `appsscript.json` with the supplied manifest. The explicit scopes are spreadsheets, Drive files created by this app, and external HTTP requests. The script only targets the spreadsheet ID and sheet gid above.
 
 4. In Script Properties, set `BRIDGE_SECRET` to the exact same private value as Vercel's `FEEDBACK_BRIDGE_SECRET`. Do not paste a secret into `Code.gs` or GitHub.
 
-5. Deploy as a **Web app**, executing as the spreadsheet owner, with access **Anyone**. The endpoint rejects POSTs without the private bridge secret. Google will ask the owner to authorize the stated scopes. A private feedback-picture folder and hidden submission-reference sheet are created on the first website submission. A separate product tab is seeded on the first menu request; uploaded product pictures are public so customers can view them.
+5. Run `prepareFood101Storage` from `healthy101food@gmail.com` to create and verify that account's two upload folders. Then create a **Web app** deployment with **Execute as Me (`healthy101food@gmail.com`)** and access **Anyone**. The endpoint rejects POSTs without the private bridge secret. Google will ask that account to authorize the stated scopes. Uploads check the actual OAuth account and folder ownership before saving. A separate product tab is seeded on the first menu request; uploaded product pictures are public so customers can view them.
 
 6. Set the deployment's `https://script.google.com/macros/s/.../exec` URL as Vercel Config variable `FEEDBACK_BRIDGE_URL`. Use `/exec`, not `/dev`.
 
@@ -60,3 +60,5 @@ Enable a Vercel Firewall rate limit for `/api/session` and `/api/feedback` appro
 - After editing Apps Script, deploy a new version of the existing web-app deployment so its URL stays the same.
 - Changing `ADMIN_SESSION_SECRET` signs out all staff.
 - Keep the generated credential file private and out of GitHub. Do not use production secrets in public preview deployments.
+- Upload folders use `FOOD101_HEALTHY_PICTURE_FOLDER_ID` and `FOOD101_HEALTHY_PRODUCT_FOLDER_ID`. Legacy folder properties are preserved while the website is switched to the new account's deployment. Transfer existing files individually and accept ownership from the Food101 account; changing the deployment does not transfer existing files or free the old account's storage.
+- The secret-protected `storage.check` action returns the actual execution account and the two folder ownership records without adding data.
